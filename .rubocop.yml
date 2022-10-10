@@ -1,4 +1,7 @@
+require: rubocop-rails
+
 AllCops:
+  NewCops: enable
   Exclude:
     - db/**/*
     - config/**/*
@@ -99,7 +102,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   CountComments: true  # count full line comments?
   Max: 40
-  ExcludedMethods: [elastic_query_parameters, parameters]
+  AllowedMethods: [elastic_query_parameters, parameters]
   Exclude:
     - "spec/**/*"
     - "db/migrate/*"
@@ -413,7 +416,7 @@ Style/WordArray:
 Style/MethodCallWithArgsParentheses:
   Description: 'Use parentheses for method calls with arguments.'
   Enabled: true
-  IgnoredMethods:
+  AllowedMethods:
     - require
     - require_relative
     - raise
