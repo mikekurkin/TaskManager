@@ -3,9 +3,11 @@ class User < ApplicationRecord
 
   has_many :my_tasks, class_name: 'Task',
                       inverse_of: :author,
+                      foreign_key: :author_id,
                       dependent: :destroy
   has_many :assigned_tasks, class_name: 'Task',
                             inverse_of: :assignee,
+                            foreign_key: :assignee_id,
                             dependent: :nullify
 
   validates :first_name, presence: true
