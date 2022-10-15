@@ -420,6 +420,8 @@ Style/MethodCallWithArgsParentheses:
     - require
     - require_relative
     - raise
+    - use
+    - optional
   Exclude:
     - Gemfile
     - db/migrate/**/*
