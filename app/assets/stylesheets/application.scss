@@ -1,0 +1,55 @@
+/*= require material-design-lite/material.min.css */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#main {
+    flex: 1 0 auto;
+}
+
+.page-content {
+    padding: 20px;
+
+    .mdl-textfield {
+        display: block;
+
+        .mdl-textfield__input {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+    }
+
+    .searchfield {
+        padding: 0 15px;
+
+        .mdl-textfield__label {
+            top: 4px;
+            left: 15px;
+        }
+
+        .mdl-textfield__input {
+            padding-left: 24px;
+        }
+    }
+
+    .mdl-button {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .mdl-data-table th a {
+        text-decoration: none;
+        color: unset;
+        font-weight: unset;
+
+        &:hover,
+        &.asc,
+        &.desc {
+            text-decoration: underline;
+            text-decoration-style: dashed;
+        }
+    }
+}
