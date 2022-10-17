@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     resources :developers, only: [:new, :create]
     resource :session, only: [:new, :create, :destroy]
   end
+
+  namespace :admin do
+    resources :users
+  end
 end
