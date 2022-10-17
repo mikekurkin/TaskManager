@@ -22,6 +22,15 @@ html lang="en"
           = "Task Manager"
         .mdl-layout-spacer 
         nav.mdl-navigation 
+          = link_to "Board", board_path, class: 'mdl-navigation__link'
+          - if current_user 
+            - if current_user.is_a? Admin
+              = link_to "Admin Page", admin_users_url, class: 'mdl-navigation__link'
+            = link_to "Log Out", session_path, method: "delete", data: { confirm: "Are you sure?" }, class: 'mdl-navigation__link'
+          - else
+            = link_to "Sign In", new_session_path, class: 'mdl-navigation__link'
+            = link_to "Sign Up", new_developers_path, class: 'mdl-navigation__link'
+
     main#main.mdl-layout__content 
       .page-content 
         = yield
