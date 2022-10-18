@@ -26,6 +26,8 @@ html lang="en"
           - if current_user
             - if current_user.is_a? Admin
               = link_to "Admin Page", admin_users_url, class: 'mdl-navigation__link'
+            span.mdl-navigation__link
+              = current_user.first_name
             = link_to "Log Out", session_path, method: "delete", data: { confirm: "Are you sure?" }, class: 'mdl-navigation__link'
           - else
             = link_to "Sign In", new_session_path, class: 'mdl-navigation__link'
