@@ -40,7 +40,7 @@ class API::V1::TasksControllerTest < ActionController::TestCase
     patch :update, params: { id: task.id, format: :json, task: task_attributes }
     assert_response :success
 
-    task.reloaded
+    task.reload
     assert_equal task.slice(*task_attributes.keys), task_attributes
   end
 
