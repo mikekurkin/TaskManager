@@ -8,5 +8,5 @@ FactoryBot.define do
 
   sequence(:name) { |n| "Task ##{n}" }
   sequence(:description) { |n| "Task Description #{n}" }
-  sequence(:expired_at) { (Date.current + rand(-30..30).days).strftime('%Y-%m-%d') }
+  sequence(:expired_at) { (Date.current + rand(-30..30).days) }
 end
