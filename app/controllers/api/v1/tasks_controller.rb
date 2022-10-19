@@ -12,4 +12,10 @@ class API::V1::TasksController < API::V1::ApplicationController
                         root: 'items',
                         meta: build_meta(tasks))
   end
+
+  def show
+    task = Task.find(params[:id])
+
+    respond_with(task, serializer: TaskSerializer)
+  end
 end
