@@ -29,18 +29,34 @@
 						"useBundler": true
 					}
 				},
-				"ruby.format": "rubocop"
-			}
-		}
-	}
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Uncomment the next line if you want start specific services in your Docker Compose config.
-	// "runServices": [],
-	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
-	// "shutdownAction": "none",
-	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	// "postCreateCommand": "apt-get update && apt-get install -y curl",
-	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+                "ruby.format": "rubocop",
+                "[ruby]": {
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "rebornix.ruby"
+                },
+                "[slim]": {
+                    "editor.tabSize": 2
+                },
+                "[javascript]": {
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+                },
+                "[javascriptreact]": {
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+                },
+                "eslint.packageManager": "yarn"
+            }
+        }
+    }
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Uncomment the next line if you want start specific services in your Docker Compose config.
+    // "runServices": [],
+    // Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+    // "shutdownAction": "none",
+    // Uncomment the next line to run commands after the container is created - for example installing curl.
+    // "postCreateCommand": "apt-get update && apt-get install -y curl",
+    // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+    // "remoteUser": "vscode"
 }
