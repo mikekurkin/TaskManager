@@ -8,7 +8,11 @@ import Rails from '@rails/ujs';
 import 'channels';
 import 'material-design-lite/material.js';
 import Turbolinks from 'turbolinks';
+import WebpackerReact from 'webpacker-react';
+import TaskBoard from './components/TaskBoard';
 
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+WebpackerReact.setup({ TaskBoard });
