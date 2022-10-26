@@ -34,6 +34,7 @@ function EditPopup({ cardId, onClose, onLoadCard, onCardDestroy, onCardUpdate })
       setErrors(error || {});
 
       if (error instanceof Error) {
+        // eslint-disable-next-line no-alert
         alert(`Update Failed! Error: ${error.message}`);
       }
     });
@@ -45,6 +46,7 @@ function EditPopup({ cardId, onClose, onLoadCard, onCardDestroy, onCardUpdate })
     onCardDestroy(task).catch((error) => {
       setSaving(false);
 
+      // eslint-disable-next-line no-alert
       alert(`Destruction Failed! Error: ${error.message}`);
     });
   };

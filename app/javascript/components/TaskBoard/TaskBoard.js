@@ -104,6 +104,7 @@ function TaskBoard() {
         loadColumnInitial(source.fromColumnId);
       })
       .catch((error) => {
+        // eslint-disable-next-line no-alert
         alert(`Move failed! ${error.message}`);
       });
   };
