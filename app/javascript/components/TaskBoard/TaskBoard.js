@@ -1,7 +1,8 @@
 import KanbanBoard from '@asseinfo/react-kanban';
-import { propOr } from 'ramda';
+import { concat, propOr } from 'ramda';
 import React, { useEffect, useState } from 'react';
 
+import ColumnHeader from 'components/ColumnHeader';
 import Task from 'components/Task';
 import TasksRepository from 'repositories/TasksRepository';
 
@@ -63,6 +64,15 @@ function TaskBoard() {
 
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
+
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    loadColumn(state, page, perPage).then(({ data }) => {
+      setBoardCards((prevState) => ({
+        ...prevState,
+        [state]: { cards: concat(prevState[state].cards, data.items), meta: data.meta },
+      }));
+    });
+  };
 
   return (
     <KanbanBoard
