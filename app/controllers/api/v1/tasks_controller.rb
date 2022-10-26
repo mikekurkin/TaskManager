@@ -3,6 +3,7 @@ class API::V1::TasksController < API::V1::ApplicationController
 
   def index
     tasks = Task.all
+      .order(updated_at: :desc)
       .ransack(ransack_params)
       .result
       .page(page)

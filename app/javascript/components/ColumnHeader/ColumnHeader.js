@@ -42,9 +42,9 @@ ColumnHeader.propTypes = {
     title: PropTypes.string.isRequired,
     cards: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     meta: PropTypes.shape({
-      totalCount: PropTypes.number.isRequired,
-      totalPages: PropTypes.number.isRequired,
-      currentPage: PropTypes.number.isRequired,
+      totalCount: PropTypes.number,
+      totalPages: PropTypes.number,
+      currentPage: PropTypes.number,
     }).isRequired,
   }).isRequired,
   onLoadMore: PropTypes.func.isRequired,
