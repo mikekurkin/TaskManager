@@ -4,6 +4,8 @@ class API::V1::ApplicationController < API::ApplicationController
 
   RANSACK_DEFAULT_SORT = 'id ASC'.freeze
 
+  respond_to :json
+
   def self.responder
     JsonResponder
   end
