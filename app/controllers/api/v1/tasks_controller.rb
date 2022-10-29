@@ -1,6 +1,4 @@
 class API::V1::TasksController < API::V1::ApplicationController
-  respond_to :json
-
   def index
     tasks = Task.all
       .ransack(ransack_params)

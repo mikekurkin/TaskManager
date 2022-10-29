@@ -1,6 +1,4 @@
 class API::V1::UsersController < API::V1::ApplicationController
-  respond_to :json
-
   def index
     users = User.all
       .ransack(ransack_params)
