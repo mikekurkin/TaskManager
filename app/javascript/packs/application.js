@@ -9,10 +9,10 @@ import 'channels';
 import 'material-design-lite/material.js';
 import Turbolinks from 'turbolinks';
 import WebpackerReact from 'webpacker-react';
-import TaskBoard from 'components/TaskBoard';
+import App from 'App';
 
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
-WebpackerReact.setup({ TaskBoard });
+WebpackerReact.setup({ App });
