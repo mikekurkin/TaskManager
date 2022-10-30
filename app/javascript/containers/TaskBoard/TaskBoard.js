@@ -53,7 +53,7 @@ function TaskBoard() {
     <div>
       <KanbanBoard
         renderCard={(task) => <Task onClick={handleEditPopupOpen} task={task} />}
-        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+        renderColumnHeader={(column) => <ColumnHeader stickyHeader column={column} onLoadMore={loadColumnMore} />}
         disableColumnDrag
         onCardDragEnd={cardDragEnd}
       >
