@@ -15,10 +15,12 @@ services:
     env: docker
     repo: https://github.com/mikekurkin/TaskManager.git
     branch: feature/devops/deploy
-    dockerCommand: ./render-entrypoint.sh
+    dockerCommand: ./render-demo-entrypoint.sh
     envVars:
       - key: PORT
         value: 3000
+      - key: DEMO
+        value: true
       - key: RAILS_ENV
         value: production
       - key: DATABASE_URL
