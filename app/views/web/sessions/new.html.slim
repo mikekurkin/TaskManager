@@ -1,7 +1,15 @@
 h4 Log in
 = simple_form_for @session, url: session_path do |f|
-  p 
+  p
     = f.input :email
     = f.input :password
   p
     = f.button :submit, "Sign In"
+
+- if ENV['DEMO']
+  p This is a demonstration board.
+  p You may use the following credentials:
+  ul
+    li admin@example.com:admin
+    li manager@example.com:manager
+    li developer@example.com:developer
