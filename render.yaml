@@ -14,7 +14,7 @@ services:
     plan: free
     env: docker
     repo: https://github.com/mikekurkin/TaskManager.git
-    branch: feature/devops/deploy
+    branch: develop
     dockerCommand: ./render-demo-entrypoint.sh
     envVars:
       - key: PORT
