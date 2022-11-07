@@ -1,6 +1,7 @@
 class API::V1::TasksController < API::V1::ApplicationController
   def index
     tasks = Task.all
+      .includes([:author, :assignee])
       .ransack(ransack_params)
       .result
       .page(page)
