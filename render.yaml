@@ -21,6 +21,8 @@ services:
         value: 3000
       - key: DEMO
         value: true
+      - key: REPLANT_SEED
+        value: ''
       - key: RAILS_ENV
         value: production
       - key: DATABASE_URL
