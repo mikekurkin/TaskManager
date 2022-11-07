@@ -31,3 +31,7 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: ROLLBAR_SERVER_ACCESS_TOKEN
+        sync: false
+      - key: ROLLBAR_CLIENT_ACCESS_TOKEN
+        sync: false
