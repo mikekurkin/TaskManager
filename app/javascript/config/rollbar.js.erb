@@ -1,0 +1,15 @@
+const rollbarConfig = {
+  accessToken: "<%= ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'] %>",
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+  payload: {
+    environment: "<%= ENV['ROLLBAR_ENV'].presence || Rails.env %>",
+    client: {
+      javascript: {
+        source_map_enabled: true,
+      },
+    },
+  },
+};
+
+export default rollbarConfig;

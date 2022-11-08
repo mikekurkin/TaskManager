@@ -37,6 +37,7 @@ gem 'active_model_serializers'
 gem 'js-routes'
 
 gem 'faker'
+gem 'rollbar'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -51,6 +52,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rubocop'
   gem 'rubocop-rails'
+
+  gem 'dotenv-rails'
 end
 
 group :development do
