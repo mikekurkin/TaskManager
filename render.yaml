@@ -35,3 +35,5 @@ services:
         sync: false
       - key: ROLLBAR_CLIENT_ACCESS_TOKEN
         sync: false
+      - key: NEWRELIC_LICENSE_KEY
+        sync: false
