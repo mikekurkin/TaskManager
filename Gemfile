@@ -38,6 +38,7 @@ gem 'js-routes'
 
 gem 'faker'
 gem 'rollbar'
+gem 'newrelic_rpm'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
