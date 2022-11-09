@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   config.after_initialize do
@@ -31,7 +31,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}",
     }
   else
     config.action_controller.perform_caching = false
@@ -46,6 +46,17 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: ENV.fetch('MAILER_USERNAME', nil),
+    password: ENV.fetch('MAILER_PASSWORD', nil),
+    address: ENV.fetch('MAILER_ADDRESS', nil),
+    port: ENV.fetch('MAILER_PORT', nil),
+    domain: ENV.fetch('MAILER_DOMAIN', nil),
+    authentication: ENV.fetch('MAILER_AUTHENTICATION', nil),
+    enable_starttls_auto: true,
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
