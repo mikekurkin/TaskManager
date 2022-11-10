@@ -1,13 +1,16 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'simplecov'
-require_relative './simplecov'
+if ENV['COVERAGE']
+  require 'simplecov'
+  require_relative './simplecov'
+end
 
 require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
   include AuthHelper
+  include ActionMailer::TestHelper
   include FactoryBot::Syntax::Methods
 
   # Run tests in parallel with specified workers
