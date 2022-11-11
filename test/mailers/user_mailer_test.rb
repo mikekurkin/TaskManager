@@ -14,7 +14,7 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
     assert_equal 'New Task Created', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was created")
+    assert email.body.to_s.include?("Task ##{task.id} was created")
   end
 
   test 'task updated' do
@@ -30,7 +30,7 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Changed', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was changed")
+    assert email.body.to_s.include?("Task ##{task.id} was changed")
   end
 
   test 'task destroyed' do
@@ -46,6 +46,6 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Task Deleted', email.subject
-    assert email.body.to_s.include?("Task #{task.id} was deleted")
+    assert email.body.to_s.include?("Task ##{task.id} was deleted")
   end
 end
