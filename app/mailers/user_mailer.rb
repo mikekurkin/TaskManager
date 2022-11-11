@@ -19,4 +19,11 @@ class UserMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'Task Deleted')
   end
+
+  def recovery_requested
+    @user = params[:user]
+    @token = params[:token] || @user.new_recovery_token
+
+    mail(to: @user.email, subject: 'Password Recovery')
+  end
 end

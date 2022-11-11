@@ -33,6 +33,9 @@ html lang="en"
             = link_to "Sign In", new_session_path, class: 'mdl-navigation__link'
             = link_to "Sign Up", new_developer_path, class: 'mdl-navigation__link'
 
+    - flash.each do |name, msg|
+      = content_tag :div, msg, class: name
+
     main#main.mdl-layout__content
       .page-content
         = yield

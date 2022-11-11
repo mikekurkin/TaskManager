@@ -5,6 +5,7 @@ h4 Log in
     = f.input :password
   p
     = f.button :submit, "Sign In"
+    = link_to "Forgot password", new_recovery_url, style: "margin: 0 10px;"
 
 - if ENV['DEMO']
   p This is a demonstration board.
