@@ -8,6 +8,8 @@ end
 require_relative '../config/environment'
 require 'rails/test_help'
 
+require 'sidekiq/testing'
+
 class ActiveSupport::TestCase
   include AuthHelper
   include ActionMailer::TestHelper

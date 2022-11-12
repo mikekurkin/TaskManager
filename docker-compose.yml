@@ -3,7 +3,8 @@ version: '3.7'
 services:
   web:
     build: .
-    volumes: &web-volumes
+    volumes:
+      &web-volumes
       - &app-volume .:/task_manager:cached
       - ~/.ssh:/root/.ssh
       - ~/.bash_history:/root/.bash_history
@@ -14,16 +15,28 @@ services:
       - 3002:3002
     depends_on:
       - db
-    environment: &web-environment
+      - redis
+      - sidekiq
+    environment:
+      &web-environment
       BUNDLE_PATH: /bundle_cache
       GEM_HOME: /bundle_cache
       GEM_PATH: /bundle_cache
       RAILS_PORT: 3000
       RUBYOPT: -W:no-deprecated -W:no-experimental
+      REDIS_URL: redis://redis
       DATABASE_HOST: db
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
     command: bundle exec rails s -b '0.0.0.0' -p 3000
+
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -C /task_manager/config/sidekiq.yml
+    environment: *web-environment
+    volumes: *web-volumes
+    depends_on:
+      - redis
 
   db:
     image: postgres:11.4
@@ -32,6 +45,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:6.2.5-alpine
 
 volumes:
   bundle_cache:
