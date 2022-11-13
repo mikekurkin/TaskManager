@@ -40,8 +40,9 @@ gem 'faker'
 gem 'rollbar'
 gem 'newrelic_rpm'
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.4.0'
 gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

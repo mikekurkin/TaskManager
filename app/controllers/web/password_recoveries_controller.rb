@@ -10,8 +10,7 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
 
     return render(:new, status: :unprocessable_entity) if @new_password_recovery.invalid?
 
-    UserMailer.with({ user: @new_password_recovery.user }).password_recovery_requested.deliver_now
-
+    SendPasswordRecoveryRequestNotificationJob.perform_async(@new_password_recovery.user.id)
     redirect_to(:new_session,
                 notice: I18n.t(:email_sent, scope: 'password_recoveries.notices'))
   end
