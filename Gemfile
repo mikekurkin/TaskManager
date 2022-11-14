@@ -45,6 +45,10 @@ gem 'sidekiq-failures'
 gem 'sidekiq-throttled'
 gem 'sidekiq-unique-jobs', '~> 7.1.12'
 
+gem 'mini_magick'
+gem 'virtus'
+gem 'file_validators'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

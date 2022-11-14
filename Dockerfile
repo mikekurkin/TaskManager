@@ -4,7 +4,7 @@ ARG RAILS_ROOT=/task_manager
 
 ARG RAILS_ENV
 
-ARG PACKAGES="vim openssl-dev postgresql-dev build-base curl nodejs yarn less tzdata git postgresql-client bash screen gcompat"
+ARG PACKAGES="vim openssl-dev postgresql-dev build-base curl nodejs yarn less tzdata git postgresql-client bash screen gcompat imagemagick"
 
 RUN apk update \
  && apk upgrade \
