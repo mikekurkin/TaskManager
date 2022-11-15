@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :board, only: :show
     resources :developers, only: [:new, :create]
     resource :session, only: [:new, :create, :destroy]
-    resource :recovery, only: [:new, :create, :show, :update]
+    resource :password_recovery, only: [:new, :create, :show, :update]
   end
 
   namespace :admin do

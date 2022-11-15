@@ -24,10 +24,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(params).task_destroyed
   end
 
-  def recovery_requested
+  def password_recovery_requested
     user = User.first
     params = { user: user, token: user.signed_id(purpose: :dummy, expires_in: 0) }
 
-    UserMailer.with(params).recovery_requested
+    UserMailer.with(params).password_recovery_requested
   end
 end

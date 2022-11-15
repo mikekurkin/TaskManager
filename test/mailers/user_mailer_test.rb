@@ -49,10 +49,10 @@ class UserMailerTest < ActionMailer::TestCase
     assert email.body.to_s.include?("Task ##{task.id} was deleted")
   end
 
-  test 'recovery requested' do
+  test 'password recovery requested' do
     user = create(:user)
     params = { user: user }
-    email = UserMailer.with(params).recovery_requested
+    email = UserMailer.with(params).password_recovery_requested
 
     assert_emails 1 do
       email.deliver_now

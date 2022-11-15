@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_202235) do
+ActiveRecord::Schema.define(version: 2022_11_15_170702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2022_11_11_202235) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "recovery_token_digest"
+    t.string "password_recovery_token_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

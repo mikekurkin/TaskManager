@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  has_secure_password :recovery_token, validations: false
+  has_secure_password :password_recovery_token, validations: false
 
   DEFAULT_TOKEN_EXPIRY = 24.hours
 
@@ -21,9 +21,9 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A\S+@.+\.\S+\z/ }
   validates :email, uniqueness: true
 
-  def new_recovery_token(expires_in = DEFAULT_TOKEN_EXPIRY)
-    token = signed_id(expires_in: expires_in, purpose: :recovery)
-    self.recovery_token = token
+  def new_password_recovery_token(expires_in = DEFAULT_TOKEN_EXPIRY)
+    token = signed_id(expires_in: expires_in, purpose: :password_recovery)
+    self.password_recovery_token = token
     save ? token : nil
   end
 
@@ -32,22 +32,22 @@ class User < ApplicationRecord
     password = params[:password]
     password_confirmation = params[:password_confirmation]
 
-    return self unless self.class.get_by_recovery_token(token) == self
+    return self unless self.class.get_by_password_recovery_token(token) == self
 
     self.password = password
     self.password_confirmation = password_confirmation
 
     if valid?
-      self.recovery_token = nil
+      self.password_recovery_token = nil
       save
     end
     self
   end
 
-  def self.get_by_recovery_token(token)
-    user = find_signed(token, purpose: :recovery)
-    return nil if user.nil? || user.recovery_token_digest.nil?
+  def self.get_by_password_recovery_token(token)
+    user = find_signed(token, purpose: :password_recovery)
+    return nil if user.nil? || user.password_recovery_token_digest.nil?
 
-    user.authenticate_recovery_token(token).presence
+    user.authenticate_password_recovery_token(token).presence
   end
 end

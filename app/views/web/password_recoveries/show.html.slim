@@ -1,5 +1,5 @@
 h4 Recover password for #{@user.email}
-= simple_form_for @recovery, url: recovery_path, method: :patch do |f|
+= simple_form_for @password_recovery, url: password_recovery_path, method: :patch do |f|
   p
     = f.input :token, as: :hidden, readonly: true, input_html: { value: @token }
     = f.input :password

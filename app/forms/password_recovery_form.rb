@@ -1,4 +1,4 @@
-class RecoveryForm
+class PasswordRecoveryForm
   include ActiveModel::Model
 
   attr_accessor(
