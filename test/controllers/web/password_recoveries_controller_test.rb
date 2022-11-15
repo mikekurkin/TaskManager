@@ -17,14 +17,14 @@ class Web::PasswordRecoveriesControllerTest < ActionController::TestCase
 
   test 'should get show' do
     user = create(:user)
-    token = user.new_password_recovery_token
+    token = PasswordRecoveryService.new_token(user)
     get :show, params: { token: token }
     assert_response :success
   end
 
   test 'should patch update' do
     user = create(:user)
-    token = user.new_password_recovery_token
+    token = PasswordRecoveryService.new_token(user)
     new_password = generate(:password)
     patch :update, params: { password_recovery_form: { token: token, password: new_password, password_confirmation: new_password } }
     assert_response :redirect

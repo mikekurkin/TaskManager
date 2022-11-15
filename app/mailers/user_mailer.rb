@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
 
   def password_recovery_requested
     @user = params[:user]
-    @token = params[:token] || @user.new_password_recovery_token
+    @token = params[:token] || PasswordRecoveryService.new_token(@user)
 
     mail(to: @user.email, subject: I18n.t('mailers.user.password_recovery_requested_subject'))
   end

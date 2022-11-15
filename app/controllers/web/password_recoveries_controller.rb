@@ -35,7 +35,8 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
 
     return render(:show, status: :unprocessable_entity) if @password_recovery.invalid?
 
-    @password_recovery.user.update_password_with_recovery_token(password_recovery_params)
+    PasswordRecoveryService.update_password_with_token(@password_recovery.user, password_recovery_params)
+
     redirect_to(:new_session,
                 notice: I18n.t('controllers.web.password_recoveries.password_updated_notice'))
   end

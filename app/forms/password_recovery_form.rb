@@ -14,7 +14,7 @@ class PasswordRecoveryForm
   end
 
   def user
-    @user ||= User.get_by_password_recovery_token(@token)
+    @user ||= PasswordRecoveryService.find_user_by_token(@token)
   end
 
   def token_valid?
