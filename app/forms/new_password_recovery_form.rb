@@ -15,6 +15,6 @@ class NewPasswordRecoveryForm
   private
 
   def user_present?
-    errors.add(:email, "no user found") if user.blank?
+    errors.add(:email, I18n.t('forms.new_password_recovery.no_user_found_error')) if user.blank?
   end
 end

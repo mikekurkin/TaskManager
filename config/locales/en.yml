@@ -30,4 +30,20 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  controllers:
+    web:
+      password_recoveries:
+        email_sent_notice: 'Email sent'
+        password_updated_notice: 'Password updated'
+        token_invalid_alert: 'Token is invalid'
+  forms:
+    new_password_recovery:
+      no_user_found_error: 'no user found'
+      no_user_found_error: 'does not match any user'
+  mailers:
+    user:
+      task_created_subject: 'New Task Created'
+      task_updated_subject: 'Task Changed'
+      task_destroyed_subject: 'Task Deleted'
+      password_recovery_requested_subject: 'Password Recovery'
+

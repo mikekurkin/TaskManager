@@ -12,7 +12,7 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
 
     email = UserMailer.with({ user: @new_password_recovery.user }).password_recovery_requested
     email.deliver_now
-    redirect_to(:new_session, notice: 'Email sent')
+    redirect_to(:new_session, notice: I18n.t('controllers.web.password_recoveries.email_sent_notice'))
   end
 
   def show
@@ -20,7 +20,9 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
     @token = params[:token]
     @user = User.get_by_password_recovery_token(@token)
 
-    redirect_to(:new_password_recovery, alert: 'Token is invalid') if @user.blank?
+    if @user.blank?
+      redirect_to(:new_password_recovery, alert: I18n.t('controllers.web.password_recoveries.token_invalid_alert'))
+    end
   end
 
   def update
@@ -28,12 +30,14 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
     @token = password_recovery_params[:token]
     @user = User.get_by_password_recovery_token(@token)
 
-    return redirect_to(:new_password_recovery, alert: 'Token is invalid') if @user.blank?
+    if @user.blank?
+      return redirect_to(:new_password_recovery, alert: I18n.t('controllers.web.password_recoveries.token_invalid_alert'))
+    end
 
     return render(:show, status: :unprocessable_entity) if @password_recovery.invalid?
 
     @user.update_password_with_recovery_token(password_recovery_params)
-    redirect_to(:new_session, notice: 'Password updated')
+    redirect_to(:new_session, notice: I18n.t('controllers.web.password_recoveries.password_updated_notice'))
   end
 
   private

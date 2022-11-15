@@ -13,7 +13,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
-    assert_equal 'New Task Created', email.subject
+    assert_equal I18n.t('mailers.user.task_created_subject'), email.subject
     assert email.body.to_s.include?("Task ##{task.id} was created")
   end
 
@@ -29,7 +29,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
-    assert_equal 'Task Changed', email.subject
+    assert_equal I18n.t('mailers.user.task_updated_subject'), email.subject
     assert email.body.to_s.include?("Task ##{task.id} was changed")
   end
 
@@ -45,7 +45,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
-    assert_equal 'Task Deleted', email.subject
+    assert_equal I18n.t('mailers.user.task_destroyed_subject'), email.subject
     assert email.body.to_s.include?("Task ##{task.id} was deleted")
   end
 
@@ -60,7 +60,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal ['noreply@taskmanager.local'], email.from
     assert_equal [user.email], email.to
-    assert_equal 'Password Recovery', email.subject
+    assert_equal I18n.t('mailers.user.password_recovery_requested_subject'), email.subject
     assert email.body.to_s.include?('Click on the link below to recover your password.')
     assert email.body.to_s.include?('recovery?token=')
   end
