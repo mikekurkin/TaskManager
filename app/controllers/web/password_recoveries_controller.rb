@@ -1,4 +1,14 @@
 class Web::PasswordRecoveriesController < Web::ApplicationController
+  def show
+    @password_recovery = PasswordRecoveryForm.new({ token: params[:token] })
+
+    if @password_recovery.invalid?
+      token_error = @password_recovery.errors.where(:token).last
+
+      return redirect_to(:new_password_recovery, alert: token_error.full_message) if token_error.present?
+    end
+  end
+
   def new
     return redirect_to(:board) if signed_in?
 
@@ -13,16 +23,6 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
     SendPasswordRecoveryRequestNotificationJob.perform_async(@new_password_recovery.user.id)
     redirect_to(:new_session,
                 notice: I18n.t(:email_sent, scope: 'password_recoveries.notices'))
-  end
-
-  def show
-    @password_recovery = PasswordRecoveryForm.new({ token: params[:token] })
-
-    if @password_recovery.invalid?
-      token_error = @password_recovery.errors.where(:token).last
-
-      return redirect_to(:new_password_recovery, alert: token_error.full_message) if token_error.present?
-    end
   end
 
   def update
