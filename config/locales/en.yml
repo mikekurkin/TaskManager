@@ -35,11 +35,11 @@ en:
       password_recoveries:
         email_sent_notice: 'Email sent'
         password_updated_notice: 'Password updated'
-        token_invalid_alert: 'Token is invalid'
   forms:
     new_password_recovery:
-      no_user_found_error: 'no user found'
       no_user_found_error: 'does not match any user'
+    password_recovery:
+      token_invalid_error: 'is invalid'
   mailers:
     user:
       task_created_subject: 'New Task Created'

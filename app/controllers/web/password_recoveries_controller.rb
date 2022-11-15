@@ -12,32 +12,32 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
 
     email = UserMailer.with({ user: @new_password_recovery.user }).password_recovery_requested
     email.deliver_now
-    redirect_to(:new_session, notice: I18n.t('controllers.web.password_recoveries.email_sent_notice'))
+    redirect_to(:new_session,
+                notice: I18n.t('controllers.web.password_recoveries.email_sent_notice'))
   end
 
   def show
-    @password_recovery = PasswordRecoveryForm.new
-    @token = params[:token]
-    @user = User.get_by_password_recovery_token(@token)
+    @password_recovery = PasswordRecoveryForm.new({ token: params[:token] })
 
-    if @user.blank?
-      redirect_to(:new_password_recovery, alert: I18n.t('controllers.web.password_recoveries.token_invalid_alert'))
+    unless @password_recovery.token_valid?
+      redirect_to(:new_password_recovery,
+                  alert: @password_recovery.errors.where(:token).last.full_message)
     end
   end
 
   def update
     @password_recovery = PasswordRecoveryForm.new(password_recovery_params)
-    @token = password_recovery_params[:token]
-    @user = User.get_by_password_recovery_token(@token)
 
-    if @user.blank?
-      return redirect_to(:new_password_recovery, alert: I18n.t('controllers.web.password_recoveries.token_invalid_alert'))
+    unless @password_recovery.token_valid?
+      return redirect_to(:new_password_recovery,
+                         alert: @password_recovery.errors.where(:token).last.full_message)
     end
 
     return render(:show, status: :unprocessable_entity) if @password_recovery.invalid?
 
-    @user.update_password_with_recovery_token(password_recovery_params)
-    redirect_to(:new_session, notice: I18n.t('controllers.web.password_recoveries.password_updated_notice'))
+    @password_recovery.user.update_password_with_recovery_token(password_recovery_params)
+    redirect_to(:new_session,
+                notice: I18n.t('controllers.web.password_recoveries.password_updated_notice'))
   end
 
   private

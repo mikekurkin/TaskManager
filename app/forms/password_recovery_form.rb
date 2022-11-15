@@ -4,9 +4,31 @@ class PasswordRecoveryForm
   attr_accessor(
     :password,
     :password_confirmation,
-    :token,
   )
+
+  attr_reader(:token)
+
+  def token=(str)
+    @token = str
+    @user = nil
+  end
+
+  def user
+    @user ||= User.get_by_password_recovery_token(@token)
+  end
+
+  def token_valid?
+    user_present?
+    errors.where(:token).blank?
+  end
 
   validates :password, presence: true, confirmation: true
   validates :password_confirmation, presence: true
+  validate :user_present?
+
+  private
+
+  def user_present?
+    errors.add(:token, I18n.t('forms.password_recovery.token_invalid_error')) if user.blank?
+  end
 end
