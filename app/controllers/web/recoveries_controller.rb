@@ -1,6 +1,6 @@
 class Web::RecoveriesController < Web::ApplicationController
   def new
-    redirect_to(:board) and return if signed_in?
+    return redirect_to(:board) if signed_in?
 
     @new_recovery = NewRecoveryForm.new
   end
@@ -8,13 +8,11 @@ class Web::RecoveriesController < Web::ApplicationController
   def create
     @new_recovery = NewRecoveryForm.new(new_recovery_params)
 
-    if @new_recovery.valid?
-      email = UserMailer.with({ user: @new_recovery.user }).recovery_requested
-      email.deliver_now
-      redirect_to(:new_session, notice: 'Email sent')
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    return render(:new, status: :unprocessable_entity) if @new_recovery.invalid?
+
+    email = UserMailer.with({ user: @new_recovery.user }).recovery_requested
+    email.deliver_now
+    redirect_to(:new_session, notice: 'Email sent')
   end
 
   def show
@@ -22,7 +20,7 @@ class Web::RecoveriesController < Web::ApplicationController
     @token = params[:token]
     @user = User.get_by_recovery_token(@token)
 
-    redirect_to(:new_recovery, alert: 'Token is invalid') unless @user.present?
+    redirect_to(:new_recovery, alert: 'Token is invalid') if @user.blank?
   end
 
   def update
@@ -30,14 +28,12 @@ class Web::RecoveriesController < Web::ApplicationController
     @token = recovery_params[:token]
     @user = User.get_by_recovery_token(@token)
 
-    redirect_to(:new_recovery, alert: 'Token is invalid') and return unless @user.present?
+    return redirect_to(:new_recovery, alert: 'Token is invalid') if @user.blank?
 
-    if @recovery.valid?
-      @user.update_password_with_recovery_token(recovery_params)
-      redirect_to(:new_session, notice: 'Password updated')
-    else
-      render(:show, status: :unprocessable_entity)
-    end
+    return render(:show, status: :unprocessable_entity) if @recovery.invalid?
+
+    @user.update_password_with_recovery_token(recovery_params)
+    redirect_to(:new_session, notice: 'Password updated')
   end
 
   private

@@ -15,8 +15,6 @@ class NewRecoveryForm
   private
 
   def user_present?
-    if user.blank?
-      errors.add(:email, "no user found")
-    end
+    errors.add(:email, "no user found") if user.blank?
   end
 end
