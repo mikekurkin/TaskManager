@@ -10,7 +10,12 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
-  config.action_mailer.default_url_options[:port] = ENV['RAILS_PORT'] || 3000
+  config.action_mailer.default_url_options[:port] = ENV['RAILS_PORT'] || 3000 if ENV['PREVIEW'].blank?
+
+  if ENV['PREVIEW'].present?
+    config.action_mailer.default_url_options[:protocol] = :https
+    config.hosts << '.app.uffizzi.com'
+  end
 
   # Settings specified here will take precedence over those in config/application.rb.
 

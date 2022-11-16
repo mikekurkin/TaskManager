@@ -1,5 +1,6 @@
 const rollbarConfig = {
-  accessToken: "<%= ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'] %>",
+  enabled: <%= ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'].present? %>,
+  accessToken: "<%= ENV.fetch('ROLLBAR_CLIENT_ACCESS_TOKEN', nil) %>",
   captureUncaught: true,
   captureUnhandledRejections: true,
   payload: {
