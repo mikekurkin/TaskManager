@@ -14,12 +14,7 @@ class PasswordRecoveryForm
   end
 
   def user
-    @user ||= PasswordRecoveryService.find_user_by_token(@token)
-  end
-
-  def token_valid?
-    user_present?
-    errors.where(:token).blank?
+    @user ||= PasswordRecoveryService.find_user_by_token(token)
   end
 
   validates :password, presence: true, confirmation: true

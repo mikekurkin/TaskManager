@@ -10,35 +10,37 @@ class Web::PasswordRecoveriesController < Web::ApplicationController
 
     return render(:new, status: :unprocessable_entity) if @new_password_recovery.invalid?
 
-    email = UserMailer.with({ user: @new_password_recovery.user }).password_recovery_requested
-    email.deliver_now
+    UserMailer.with({ user: @new_password_recovery.user }).password_recovery_requested.deliver_now
+
     redirect_to(:new_session,
-                notice: I18n.t('controllers.web.password_recoveries.email_sent_notice'))
+                notice: I18n.t(:email_sent, scope: 'password_recoveries.notices'))
   end
 
   def show
     @password_recovery = PasswordRecoveryForm.new({ token: params[:token] })
 
-    unless @password_recovery.token_valid?
-      redirect_to(:new_password_recovery,
-                  alert: @password_recovery.errors.where(:token).last.full_message)
+    if @password_recovery.invalid?
+      token_error = @password_recovery.errors.where(:token).last
+
+      return redirect_to(:new_password_recovery, alert: token_error.full_message) if token_error.present?
     end
   end
 
   def update
     @password_recovery = PasswordRecoveryForm.new(password_recovery_params)
 
-    unless @password_recovery.token_valid?
-      return redirect_to(:new_password_recovery,
-                         alert: @password_recovery.errors.where(:token).last.full_message)
-    end
+    if @password_recovery.invalid?
+      token_error = password_recovery.errors.where(:token).last
 
-    return render(:show, status: :unprocessable_entity) if @password_recovery.invalid?
+      return redirect_to(:new_password_recovery, alert: token_error.full_message) if token_error.present?
+
+      return render(:show, status: :unprocessable_entity)
+    end
 
     PasswordRecoveryService.update_password_with_token(@password_recovery.user, password_recovery_params)
 
     redirect_to(:new_session,
-                notice: I18n.t('controllers.web.password_recoveries.password_updated_notice'))
+                notice: I18n.t(:password_updated, scope: 'password_recoveries.notices'))
   end
 
   private
