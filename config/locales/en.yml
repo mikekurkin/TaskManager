@@ -30,20 +30,20 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  controllers:
-    web:
-      password_recoveries:
-        email_sent_notice: 'Email sent'
-        password_updated_notice: 'Password updated'
-  forms:
-    new_password_recovery:
-      no_user_found_error: 'does not match any user'
-    password_recovery:
-      token_invalid_error: 'is invalid'
-  mailers:
-    user:
-      task_created_subject: 'New Task Created'
-      task_updated_subject: 'Task Changed'
-      task_destroyed_subject: 'Task Deleted'
-      password_recovery_requested_subject: 'Password Recovery'
-
+  user_mailer:
+    task_created:
+      subject: 'New Task Created'
+    task_updated:
+      subject: 'Task Changed'
+    task_destroyed:
+      subject: 'Task Deleted'
+    password_recovery_requested:
+      subject: 'Password Recovery'
+  password_recoveries:
+    notices:
+      email_sent: 'Email sent'
+      password_updated: 'Password updated'
+  errors:
+    attributes:
+      email:
+        no_user_found: 'does not match any user'

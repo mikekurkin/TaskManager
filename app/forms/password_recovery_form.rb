@@ -29,6 +29,6 @@ class PasswordRecoveryForm
   private
 
   def user_present?
-    errors.add(:token, I18n.t('forms.password_recovery.token_invalid_error')) if user.blank?
+    errors.add(:token, :invalid) if user.blank?
   end
 end
