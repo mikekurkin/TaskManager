@@ -1,0 +1,57 @@
+x-uffizzi:
+  ingress:
+    service: app
+    port: 3000
+
+services:
+  app:
+    image: "${APP_IMAGE}"
+    entrypoint: /task_manager/entrypoint-app.uffizzi.sh
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - redis
+      - worker
+    environment:
+      &app-environment
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      RAILS_PORT: 3000
+      DEMO: true
+      PREVIEW: true
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: "${RAILS_MASTER_KEY}"
+    volumes:
+      - letter-opener:/task_manager/tmp/letter_opener
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+
+  worker:
+    image: "${APP_IMAGE}"
+    entrypoint: /task_manager/entrypoint-worker.uffizzi.sh
+    environment: *app-environment
+    depends_on:
+      - redis
+    volumes:
+      - letter-opener:/task_manager/tmp/letter_opener
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+
+  db:
+    image: postgres:11.4
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:6.2.5-alpine
+
+volumes:
+  letter-opener:
