@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    mount Sidekiq::Web, at: '/sidekiq'
     resources :users
   end
 
