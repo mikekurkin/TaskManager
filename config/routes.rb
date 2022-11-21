@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-      resources :tasks, only: [:index, :show, :create, :update, :destroy]
+      resources :tasks, only: [:index, :show, :create, :update, :destroy] do
+        put '/attach_image', to: 'tasks#attach_image'
+        put '/remove_image', to: 'tasks#remove_image'
+      end
       resources :users, only: [:index, :show]
     end
   end
