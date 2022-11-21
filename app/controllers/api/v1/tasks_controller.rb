@@ -2,6 +2,7 @@ class API::V1::TasksController < API::V1::ApplicationController
   def index
     tasks = Task.all
       .includes([:author, :assignee])
+      .with_attached_image
       .ransack(ransack_params)
       .result
       .page(page)
