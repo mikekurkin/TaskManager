@@ -30,4 +30,20 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  user_mailer:
+    task_created:
+      subject: 'New Task Created'
+    task_updated:
+      subject: 'Task Changed'
+    task_destroyed:
+      subject: 'Task Deleted'
+    password_recovery_requested:
+      subject: 'Password Recovery'
+  password_recoveries:
+    notices:
+      email_sent: 'Email sent'
+      password_updated: 'Password updated'
+  errors:
+    attributes:
+      email:
+        no_user_found: 'does not match any user'

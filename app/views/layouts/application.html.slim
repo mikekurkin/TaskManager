@@ -33,6 +33,14 @@ html lang="en"
             = link_to "Sign In", new_session_path, class: 'mdl-navigation__link'
             = link_to "Sign Up", new_developer_path, class: 'mdl-navigation__link'
 
+    - flash.each do |name, msg|
+      div class="mdl-snackbar mdl-snackbar--active flash flash-#{name}"
+        div class="flash__text"
+          = msg
+        button class="flash__close" type="button" onclick="this.parentElement.hidden=true;"
+          i.material-icons close
+
+
     main#main.mdl-layout__content
       .page-content
         = yield

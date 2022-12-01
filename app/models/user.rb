@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_secure_password :password_recovery_token, validations: false
 
   has_many :my_tasks, class_name: 'Task',
                       inverse_of: :author,

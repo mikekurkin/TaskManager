@@ -1,0 +1,6 @@
+h4 Forgot password
+= simple_form_for @new_password_recovery, url: password_recovery_path do |f|
+  p
+    = f.input :email
+  p
+    = f.button :submit, "Recover"

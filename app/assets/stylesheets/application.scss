@@ -57,3 +57,46 @@ body {
         }
     }
 }
+
+.mdl-snackbar.flash {
+    position: fixed;
+    bottom: unset;
+    top: 65px;
+    z-index: 2;
+    font-weight: 600;
+
+    .flash__close {
+        background: transparent;
+        border: none;
+        overflow: hidden;
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        align-self: center;
+        float: right;
+        padding: 10px 14px 10px 12px;
+        font-weight: inherit;
+    }
+
+    .flash__text {
+        padding: 14px 12px 14px 24px;
+        vertical-align: middle;
+        float: left;
+    }
+
+    &.flash-error {
+        background-color: #F3D8DA;
+        color: #79282C;
+    }
+
+    &.flash-alert {
+        background-color: #FDF3D1;
+        color: #624E17;
+    }
+
+    &.flash-notice {
+        background-color: #D6F3FB;
+        color: #22505E;
+    }
+}

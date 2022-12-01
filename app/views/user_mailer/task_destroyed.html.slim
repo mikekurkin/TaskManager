@@ -1,0 +1,5 @@
+| Dear #{@user.first_name}!
+
+  Task ##{@task.id} was deleted:
+
+= render partial: "task_card", locals: { task: @task }

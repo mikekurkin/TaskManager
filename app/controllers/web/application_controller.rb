@@ -1,4 +1,4 @@
 class Web::ApplicationController < ApplicationController
   include AuthHelper
-  helper_method :current_user
+  helper_method :current_user, :signed_in?
 end

@@ -37,3 +37,15 @@ services:
         sync: false
       - key: NEWRELIC_LICENSE_KEY
         sync: false
+      - key: MAILER_PORT
+        value: 587
+      - key: MAILER_AUTHENTICATION
+        value: plain
+      - key: MAILER_USERNAME
+        sync: false
+      - key: MAILER_PASSWORD
+        sync: false
+      - key: MAILER_ADDRESS
+        sync: false
+      - key: MAILER_DOMAIN
+        sync: false

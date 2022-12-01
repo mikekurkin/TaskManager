@@ -3,6 +3,8 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  ENV['DISABLE_HTTPS'].present? || config.action_mailer.default_url_options[:protocol] = :https
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -63,6 +65,17 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "task_manager_production"
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: ENV.fetch('MAILER_USERNAME', nil),
+    password: ENV.fetch('MAILER_PASSWORD', nil),
+    address: ENV.fetch('MAILER_ADDRESS', nil),
+    port: ENV.fetch('MAILER_PORT', nil),
+    domain: ENV.fetch('MAILER_DOMAIN', nil),
+    authentication: ENV.fetch('MAILER_AUTHENTICATION', nil),
+    enable_starttls_auto: true,
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
