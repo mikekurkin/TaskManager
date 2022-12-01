@@ -1,12 +1,7 @@
 class NewPasswordRecoveryForm
   include ActiveModel::Model
 
-  attr_reader(:email)
-
-  def email=(str)
-    @email = str
-    @user = nil
-  end
+  attr_accessor(:email)
 
   def user
     @user ||= User.find_by(email: email)

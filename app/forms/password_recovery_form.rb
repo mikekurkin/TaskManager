@@ -4,14 +4,8 @@ class PasswordRecoveryForm
   attr_accessor(
     :password,
     :password_confirmation,
+    :token,
   )
-
-  attr_reader(:token)
-
-  def token=(str)
-    @token = str
-    @user = nil
-  end
 
   def user
     @user ||= PasswordRecoveryService.find_user_by_token(token)
